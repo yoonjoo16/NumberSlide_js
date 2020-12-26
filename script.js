@@ -2,6 +2,7 @@ var board = Array(Array(0, 0, 0, 0, 0), Array(0, 0, 0, 0, 0), Array(0, 0, 0, 0, 
 var X;
 var Y;
 var changed;
+var time;
 
 initBoard();
 
@@ -100,7 +101,17 @@ function initBoard() {
     X = 4;
     Y = 4;
     changed = 0; 
+    time = 300;
     draw();
+    var timer = setInterval(function(){
+        document.getElementById("timer").innerHTML = parseInt(time/60) + ":" + (time % 60);
+        time --;    
+        if(time < 0) {
+            clearInterval(timer);
+            alert("Time out!");
+            initBoard();
+        }
+    }, 1000);
 }
 
 function draw() {
@@ -117,7 +128,6 @@ function draw() {
                 cell.style.background = "#d9d9d9";
             }
             if (i == X && j == Y) {
-                cell.style.border = "1px solid black";
                 cell.style.color = "#ffffff";
                 cell.style.background = "#737373";
             }
@@ -131,8 +141,8 @@ function checkGameover() {
         alert("Good job!");
         return true;
     }else{
-        if(changed == 50) {
-            alert("You've changed 50 times! Game over")
+        if(changed == 200) {
+            alert("You've changed 200 times! Game over")
             return true;
         }else{
             return false;
