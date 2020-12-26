@@ -95,6 +95,8 @@ function initBoard() {
             if (!(i == 4 && j == 4)) {
                 board[i][j] = numbers[k];
                 k++;
+            } else {
+                board[i][j] = 0;
             }
         }
     }
